@@ -1,0 +1,65 @@
+﻿@model IEnumerable<inventory.Models.assets>
+
+
+<div class="container p-3">
+    <div class="row pt-5">
+        <div class="col-6">
+            <h2 class="text-primary">Asset List</h2>
+        </div>
+    
+        <div class="col-6" align="right">
+            <a asp-controller="Assets" asp-action="Create" class="btn btn-primary">
+                Add Assets
+            </a>
+        </div>
+    </div>
+</div>
+
+<br/><br/>
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Condition
+                </th>
+                <th>
+                    ..
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+            <tr>
+                <td width="50%">@obj.Name</td>
+                <td width="50%">@obj.Category</td>
+                <td width="50%">@obj.Condition</td>
+                <td class="text-center">
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Assets" asp-route-Id="@obj.Id" asp-action="Edit" class="btn btn-primary mx-0">
+                            Edit
+                        </a>
+                        <a asp-controller="Assets" asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger mx-4">
+                            Delete
+                        </a>
+                    </div>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p> No Asset exist</p>
+}
